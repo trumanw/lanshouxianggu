@@ -53,9 +53,18 @@ var game = window.game = {
 
         // init parameters
         this.initBackground();
+        this.initKeyboard();
 
         // ready to play
         this.gameReady();
+    },
+
+    initKeyboard: function(){
+        // init keyboard
+        this.keyboard = new game.Keyboard({
+            width: this.width,
+            height: this.height
+        }).addTo(this.stave);
     },
 
     initBackground: function(){
