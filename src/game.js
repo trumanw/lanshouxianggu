@@ -7,6 +7,7 @@ window.onload = function(){
 var game = window.game = {
     width: 0,
     height: 0,
+    layer: 0,
 
     // Resources
     asset: null,
@@ -33,6 +34,7 @@ var game = window.game = {
     initStave: function(){
         this.width = 720;
         this.height = 1280;
+        this.layer = 8;
         this.scale = 0.5;
 
         // init stave context
@@ -54,6 +56,7 @@ var game = window.game = {
         // init parameters
         this.initBackground();
         this.initKeyboard();
+        this.initPitch();
 
         // ready to play
         this.gameReady();
@@ -63,8 +66,21 @@ var game = window.game = {
         // init keyboard
         this.keyboard = new game.Keyboard({
             width: this.width,
-            height: this.height
+            height: this.height,
+            keyHeight: this.height / this.layer,
+            keyWidth: this.width / 4
         }).addTo(this.stave);
+    },
+
+    initPitch: function(){
+        // init stave bg
+        var bgWidth = this.width * this.scale;
+        var bgHeight = this.height * this.scale;
+
+        // this.stave = new game.Stave({
+        //     width: this.width,
+        //     height: this.height
+        // }).addTo(this.stave);
     },
 
     initBackground: function(){
@@ -74,7 +90,8 @@ var game = window.game = {
         document.body.insertBefore(Hilo.createElement('div', {
             id: 'bg',
             style: {
-                background: 'url(images/bg.png) no-repeat',
+                // background: 'url(images/bg.png) no-repeat',
+                backgroundColor: "#D4D4D4",
                 backgroundSize: bgWidth + 'px, ' + bgHeight + 'px',
                 position: 'absolute',
                 width: bgWidth + 'px',
@@ -83,16 +100,16 @@ var game = window.game = {
         }), this.stave.canvas);
 
         // init keyboard
-        this.keyboard = new Hilo.Bitmap({
-            id: 'keyboard',
-            image: this.asset.keyboard
-        }).addTo(this.stave);
+        // this.keyboard = new Hilo.Bitmap({
+        //     id: 'keyboard',
+        //     image: this.asset.keyboard
+        // }).addTo(this.stave);
 
         // setup axis y
-        this.keyboard.y = this.height - this.keyboard.height;
+        // this.keyboard.y = this.height - this.keyboard.height;
 
         // tween the keyboard
-        Hilo.Tween.to(this.keyboard, {x:-60}, {duration:300, loop:true});
+        // Hilo.Tween.to(this.keyboard, {x:-60}, {duration:300, loop:true});
     },
 
     gameReady: function(){

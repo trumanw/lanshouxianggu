@@ -8,43 +8,44 @@ var Keyboard = ns.Keyboard = Hilo.Class.create({
     },
 
     init: function(properties){
-        var keyHeight = 180;
-        var keyWidth = 180;
+        // var keyHeight = 160;
+        // var keyWidth = 180;
+        var keyBorderWidth = 2;
         var doKey = new Hilo.Graphics({
             id: 'do',
             x: 0,
-            y: this.height - keyHeight,
-            width: keyWidth,
-            height: keyHeight
+            y: properties.height - properties.keyHeight,
+            width: properties.keyWidth,
+            height: properties.keyHeight
         });
-        doKey.lineStyle(4, "#009898").drawRect(0, 0, keyWidth-2, keyHeight-2).endFill();
+        doKey.lineStyle(keyBorderWidth, "#090909").drawRect(keyBorderWidth/2, -keyBorderWidth/2, properties.keyWidth-keyBorderWidth, properties.keyHeight).endFill();
 
         var riKey = new Hilo.Graphics({
             id: "ri",
-            x: keyWidth,
-            y: this.height - keyHeight,
-            width: keyWidth,
-            height: keyHeight
+            x: properties.keyWidth,
+            y: properties.height - properties.keyHeight,
+            width: properties.keyWidth,
+            height: properties.keyHeight
         });
-        riKey.lineStyle(4, "#009898").drawRect(0, 0, keyWidth-2, keyHeight-2).endFill();
+        riKey.lineStyle(keyBorderWidth, "#090909").drawRect(keyBorderWidth/2, -keyBorderWidth/2, properties.keyWidth-keyBorderWidth, properties.keyHeight).endFill();
 
         var miKey = new Hilo.Graphics({
             id: "mi",
-            x: 2 * keyWidth,
-            y: this.height - keyHeight,
-            width: keyWidth,
-            height: keyHeight
+            x: 2 * properties.keyWidth,
+            y: properties.height - properties.keyHeight,
+            width: properties.keyWidth,
+            height: properties.keyHeight
         });
-        miKey.lineStyle(4, "#009898").drawRect(0, 0, keyWidth-2, keyHeight-2).endFill();
+        miKey.lineStyle(keyBorderWidth, "#090909").drawRect(keyBorderWidth/2, -keyBorderWidth/2, properties.keyWidth-keyBorderWidth, properties.keyHeight).endFill();
 
         var faKey = new Hilo.Graphics({
             id: "fa",
-            x: 3 * keyWidth,
-            y: this.height - keyHeight,
-            width: keyWidth,
-            height: keyHeight
+            x: 3 * properties.keyWidth,
+            y: properties.height - properties.keyHeight,
+            width: properties.keyWidth,
+            height: properties.keyHeight
         });
-        faKey.lineStyle(4, "#009898").drawRect(0, 0, keyWidth-2, keyHeight-2).endFill();
+        faKey.lineStyle(keyBorderWidth, "#090909").drawRect(keyBorderWidth/2, -keyBorderWidth/2, properties.keyWidth-keyBorderWidth, properties.keyHeight).endFill();
 
         this.addChild(doKey, riKey, miKey, faKey);
 
