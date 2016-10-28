@@ -60,6 +60,9 @@ var game = window.game = {
 
         // ready to play
         this.gameReady();
+
+        // DEBUG
+        this.pitch.startMove();
     },
 
     initKeyboard: function(){
@@ -77,10 +80,14 @@ var game = window.game = {
         var bgWidth = this.width * this.scale;
         var bgHeight = this.height * this.scale;
 
-        // this.stave = new game.Stave({
-        //     width: this.width,
-        //     height: this.height
-        // }).addTo(this.stave);
+        this.pitch = new game.Pitch({
+            image: this.asset.pitch,
+            width: this.width,
+            height: this.height,
+            layer: this.layer,
+            pitchHeight: this.height / this.layer,
+            pitchWidth: this.width / 4
+        }).addTo(this.stave);
     },
 
     initBackground: function(){
@@ -115,6 +122,7 @@ var game = window.game = {
     gameReady: function(){
         this.state = 'ready';
         this.score = 0;
+        this.pitch.reset();
     }
 };
 
