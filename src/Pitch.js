@@ -12,6 +12,7 @@ var Pitch = ns.Pitch = Hilo.Class.create({
         this.createPitches(properties.image, properties)
         this.moveTween = new Hilo.Tween(this, null, {
             // onComplete: this.resetPitches.bind(this)
+            // onComplete: this.stopMove.bind(this)
         });
     },
 

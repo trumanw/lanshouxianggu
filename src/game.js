@@ -53,10 +53,14 @@ var game = window.game = {
         this.ticker.addTick(this.stave);
         this.ticker.start();
 
+        // bind actions on DOM
+        this.stave.enableDOMEvent(Hilo.event.POINTER_START, true);
+        // this.stave.on(Hilo.event.POINTER_START, this.onUserInput.bind(this));
+
         // init parameters
         this.initBackground();
-        this.initKeyboard();
         this.initPitch();
+        this.initKeyboard();
 
         // ready to play
         this.gameReady();
@@ -73,6 +77,18 @@ var game = window.game = {
             keyHeight: this.height / this.layer,
             keyWidth: this.width / 4
         }).addTo(this.stave);
+
+        // bind action on keyboard
+        console.log(this.keyboard.getChildById('do'));
+        this.keyboard.getChildById('do').on(Hilo.event.POINTER_START, function(e){
+            e._stopped = true;
+            this.pitch.resetPitches();
+        }.bind(this));
+        console.log(this.keyboard.getChildById('do'));
+    },
+
+    onUserInput: function(e){
+        // this.pitch.resetPitches();
     },
 
     initPitch: function(){
