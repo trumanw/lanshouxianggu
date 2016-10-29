@@ -233,7 +233,7 @@ var game = window.game = {
 
     gameStart: function(){
         this.state = 'playing';
-        this.pitch.startMove();
+        // this.pitch.startMove();
     },
 
     gameOver: function(){
