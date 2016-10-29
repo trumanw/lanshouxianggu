@@ -143,6 +143,8 @@ var game = window.game = {
         // init background context
         var bgWidth = this.width * this.scale;
         var bgHeight = this.height * this.scale;
+        var unitWidth = this.width / 4;
+        var unitHeight = this.height / this.layer;
         document.body.insertBefore(Hilo.createElement('div', {
             id: 'bg',
             style: {
@@ -155,17 +157,41 @@ var game = window.game = {
             }
         }), this.stave.canvas);
 
-        // init keyboard
-        // this.keyboard = new Hilo.Bitmap({
-        //     id: 'keyboard',
-        //     image: this.asset.keyboard
-        // }).addTo(this.stave);
+        // draw 4 stave lines
+        var doChannel = new Hilo.Graphics({
+            id: 'doChnl',
+            x: 0,
+            y: 0,
+            width: unitWidth,
+            height: bgHeight-unitHeight
+        });
+        doChannel.lineStyle(2, "#090909").drawRect(0, -2, unitWidth, this.height-unitHeight).endFill();
+        var riChannel = new Hilo.Graphics({
+            id: 'riChnl',
+            x: 0,
+            y: 0,
+            width: unitWidth,
+            height: bgHeight-unitHeight
+        });
+        doChannel.lineStyle(2, "#090909").drawRect(unitWidth, -2, unitWidth, this.height-unitHeight).endFill();
+        var miChannel = new Hilo.Graphics({
+            id: 'miChnl',
+            x: 0,
+            y: 0,
+            width: unitWidth,
+            height: bgHeight-unitHeight
+        });
+        doChannel.lineStyle(2, "#090909").drawRect(2*unitWidth, -2, unitWidth, this.height-unitHeight).endFill();
+        var faChannel = new Hilo.Graphics({
+            id: 'faChnl',
+            x: 0,
+            y: 0,
+            width: unitWidth,
+            height: bgHeight-unitHeight
+        });
+        doChannel.lineStyle(2, "#090909").drawRect(3*unitWidth, -2, unitWidth, this.height-unitHeight).endFill();
 
-        // setup axis y
-        // this.keyboard.y = this.height - this.keyboard.height;
-
-        // tween the keyboard
-        // Hilo.Tween.to(this.keyboard, {x:-60}, {duration:300, loop:true});
+        this.stave.addChild(doChannel, riChannel, miChannel, faChannel);
     },
 
     gameReady: function(){
