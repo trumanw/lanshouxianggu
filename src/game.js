@@ -57,6 +57,8 @@ var game = window.game = {
 
         // bind actions on DOM
         this.stave.enableDOMEvent(Hilo.event.POINTER_START, true);
+        // enable Web sound
+        Hilo.WebSound.enableAudio();
 
         // init parameters
         this.initBackground();
@@ -107,8 +109,16 @@ var game = window.game = {
     },
 
     initKeyboardActions: function(){
+        // init audio
+        Hilo.WebSound.enableAudio();
+        var btnClickAudio = Hilo.WebSound.getAudio({
+            src: "http://g.tbcdn.cn/mtb/app-618h5/1.0.8/images/mole_die.mp3",
+            loop: false
+        });
+
         // bind actions on keyboard
         this.keyboard.getChildById('do').on(Hilo.event.POINTER_START, function(e){
+            btnClickAudio.play();
             if(this.pitch.hitTestPitch(1)){
                 // hit on the right pitch
                 this.pitch.startMove();
@@ -120,6 +130,7 @@ var game = window.game = {
         }.bind(this));
 
         this.keyboard.getChildById('ri').on(Hilo.event.POINTER_START, function(e){
+            btnClickAudio.play();
             if(this.pitch.hitTestPitch(2)){
                 // hit on the right pitch
                 this.pitch.startMove();
@@ -131,6 +142,7 @@ var game = window.game = {
         }.bind(this));
 
         this.keyboard.getChildById('mi').on(Hilo.event.POINTER_START, function(e){
+            btnClickAudio.play();
             if(this.pitch.hitTestPitch(3)){
                 // hit on the right pitch
                 this.pitch.startMove();
@@ -142,6 +154,7 @@ var game = window.game = {
         }.bind(this));
 
         this.keyboard.getChildById('fa').on(Hilo.event.POINTER_START, function(e){
+            btnClickAudio.play();
             if(this.pitch.hitTestPitch(4)){
                 // hit on the right pitch
                 this.pitch.startMove();
