@@ -16,11 +16,13 @@ var game = window.game = {
     state: null,
     score: 0,
 
-    // Scenario
     bg: null,
     stave: null,
     keyboard: null,
     pitch: null,
+
+    gameReadyScene: null,
+    gameOverScene: null,
 
     init: function(){
         this.asset = new game.Asset();
@@ -55,18 +57,41 @@ var game = window.game = {
 
         // bind actions on DOM
         this.stave.enableDOMEvent(Hilo.event.POINTER_START, true);
-        // this.stave.on(Hilo.event.POINTER_START, this.onUserInput.bind(this));
 
         // init parameters
         this.initBackground();
         this.initPitch();
         this.initKeyboard();
+        this.initScenes();
 
         // ready to play
-        this.gameReady();
+        // this.gameReady();
+    },
 
-        // DEBUG
-        this.pitch.startMove();
+    initScenes: function(){
+        // init GameReady scene
+        // this.gameReadyScene = new game.ReadyScene({
+        //     width: this.width,
+        //     height: this.height,
+        //     image: this.asset.ready
+        // }).addTo(this.stave);
+
+        // init GameOver scene
+        this.gameOverScene = new game.OverScene({
+            width: this.width,
+            height: this.height,
+            image: this.asset.over,
+            numberGlyphs: this.asset.numberGlyphs,
+            visible: false
+        }).addTo(this.stave);
+
+        //绑定开始按钮事件
+        this.gameOverScene.getChildById('start').on(Hilo.event.POINTER_START, function(e){
+            e._stopped = true;
+            this.gameOverScene.visible = false;
+            // show pitch again
+            this.gameReady();
+        }.bind(this));
     },
 
     initKeyboard: function(){
@@ -78,6 +103,10 @@ var game = window.game = {
             keyWidth: this.width / 4
         }).addTo(this.stave);
 
+        this.initKeyboardActions();
+    },
+
+    initKeyboardActions: function(){
         // bind actions on keyboard
         this.keyboard.getChildById('do').on(Hilo.event.POINTER_START, function(e){
             if(this.pitch.hitTestPitch(1)){
@@ -86,6 +115,7 @@ var game = window.game = {
             } else {
                 // hit on the wrong pitch
                 // game over
+                this.gameOver();
             }
         }.bind(this));
 
@@ -96,6 +126,7 @@ var game = window.game = {
             } else {
                 // hit on the wrong pitch
                 // game over
+                this.gameOver();
             }
         }.bind(this));
 
@@ -106,6 +137,7 @@ var game = window.game = {
             } else {
                 // hit on the wrong pitch
                 // game over
+                this.gameOver();
             }
         }.bind(this));
 
@@ -116,12 +148,9 @@ var game = window.game = {
             } else {
                 // hit on the wrong pitch
                 // game over
+                this.gameOver();
             }
         }.bind(this));
-    },
-
-    onUserInput: function(e){
-        // this.pitch.resetPitches();
     },
 
     initPitch: function(){
@@ -198,6 +227,26 @@ var game = window.game = {
         this.state = 'ready';
         this.score = 0;
         this.pitch.reset();
+        this.gameOverScene.visible = false;
+        this.gameStart();
+    },
+
+    gameStart: function(){
+        this.state = 'playing';
+        this.pitch.startMove();
+    },
+
+    gameOver: function(){
+        if(this.state !== 'over'){
+            // update state of game
+            this.state = 'over';
+            // stop moving pitches
+            this.pitch.stopMove();
+            // hide pitch
+            this.pitch.visible = false;
+            // show the GameOver scene
+            this.gameOverScene.show(this.pitch.passThrough, 0);
+        }
     }
 };
 

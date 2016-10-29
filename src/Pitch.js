@@ -8,8 +8,8 @@ var Pitch = ns.Pitch = Hilo.Class.create({
         this.numTotalPitches = properties.layer + 1;
         this.numOffStavePitches = 1;
 
-        this.reset();
-        this.createPitches(properties.image, properties)
+        // this.reset(properties.image, properties);
+        this.createPitches(properties.image, properties);
         this.moveTween = new Hilo.Tween(this, null, {
             // onComplete: this.resetPitches.bind(this)
             // onComplete: this.stopMove.bind(this)
@@ -38,6 +38,22 @@ var Pitch = ns.Pitch = Hilo.Class.create({
                 scaleY: 0.5
             }).addTo(this);
 
+            this.placePitches(pitch, i);
+        }
+    },
+
+    renewPitches: function(image, properties){
+        for(var i = 0; i < this.numTotalPitches; i++){
+            var pitch = new Hilo.Bitmap({
+                id: 'pitch' + i,
+                image: image,
+                rect: [4, 4, 356, 316],
+                scaleX: 0.5,
+                scaleY: 0.5
+            })
+
+            // this.getChildAt(i) = pitch;
+            this.setChildIndex(pitch, i);
             this.placePitches(pitch, i);
         }
     },
@@ -78,7 +94,12 @@ var Pitch = ns.Pitch = Hilo.Class.create({
 
     hitTestPitch: function(index) {
         var total = this.children.length;
-        var currentPitch =(this.children[total-this.numOffStavePitches-1].x / this.pitchWidth) + 1;
+        var currentPitch = 0;
+        if (0 == this.passThrough){
+            currentPitch = (this.children[total-this.numOffStavePitches].x / this.pitchWidth) + 1;
+        } else if (this.passThrough > 0) {
+            currentPitch = (this.children[total-this.numOffStavePitches-1].x / this.pitchWidth) + 1;
+        }
         return currentPitch == index;
     },
 
@@ -98,9 +119,13 @@ var Pitch = ns.Pitch = Hilo.Class.create({
         if(this.moveTween) this.moveTween.pause();
     },
 
-    reset: function(){
+    reset: function(image, properties){
         this.y = this.startY;
         this.passThrough = 0;
+        // new pitches
+        this.renewPitches(image, properties);
+        // show itself
+        this.visible = true;
     }
 
 });
