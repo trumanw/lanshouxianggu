@@ -11,8 +11,7 @@ var Pitch = ns.Pitch = Hilo.Class.create({
         // this.reset(properties.image, properties);
         this.createPitches(properties.image, properties);
         this.moveTween = new Hilo.Tween(this, null, {
-            // onComplete: this.resetPitches.bind(this)
-            // onComplete: this.stopMove.bind(this)
+            onComplete: this.resetPitches.bind(this)
         });
     },
 
@@ -87,19 +86,11 @@ var Pitch = ns.Pitch = Hilo.Class.create({
 
         // update number of the passing through pitches
         this.passThrough += this.numOffStavePitches;
-
-        // keep moving forward
-        this.startMove();
     },
 
     hitTestPitch: function(index) {
         var total = this.children.length;
-        var currentPitch = 0;
-        if (0 == this.passThrough){
-            currentPitch = (this.children[total-this.numOffStavePitches].x / this.pitchWidth) + 1;
-        } else if (this.passThrough > 0) {
-            currentPitch = (this.children[total-this.numOffStavePitches-1].x / this.pitchWidth) + 1;
-        }
+        var currentPitch = (this.children[total-this.numOffStavePitches].x / this.pitchWidth) + 1;
         return currentPitch == index;
     },
 

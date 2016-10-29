@@ -111,7 +111,7 @@ var game = window.game = {
         this.keyboard.getChildById('do').on(Hilo.event.POINTER_START, function(e){
             if(this.pitch.hitTestPitch(1)){
                 // hit on the right pitch
-                this.pitch.resetPitches();
+                this.pitch.startMove();
             } else {
                 // hit on the wrong pitch
                 // game over
@@ -122,7 +122,7 @@ var game = window.game = {
         this.keyboard.getChildById('ri').on(Hilo.event.POINTER_START, function(e){
             if(this.pitch.hitTestPitch(2)){
                 // hit on the right pitch
-                this.pitch.resetPitches();
+                this.pitch.startMove();
             } else {
                 // hit on the wrong pitch
                 // game over
@@ -133,7 +133,7 @@ var game = window.game = {
         this.keyboard.getChildById('mi').on(Hilo.event.POINTER_START, function(e){
             if(this.pitch.hitTestPitch(3)){
                 // hit on the right pitch
-                this.pitch.resetPitches();
+                this.pitch.startMove();
             } else {
                 // hit on the wrong pitch
                 // game over
@@ -144,7 +144,7 @@ var game = window.game = {
         this.keyboard.getChildById('fa').on(Hilo.event.POINTER_START, function(e){
             if(this.pitch.hitTestPitch(4)){
                 // hit on the right pitch
-                this.pitch.resetPitches();
+                this.pitch.startMove();
             } else {
                 // hit on the wrong pitch
                 // game over
