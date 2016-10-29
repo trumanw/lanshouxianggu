@@ -76,12 +76,18 @@ var Pitch = ns.Pitch = Hilo.Class.create({
         this.startMove();
     },
 
+    hitTestPitch: function(index) {
+        var total = this.children.length;
+        var currentPitch =(this.children[total-this.numOffStavePitches-1].x / this.pitchWidth) + 1;
+        return currentPitch == index;
+    },
+
     startMove: function(){
         // setup length interval of animation
         var targetY = this.pitchHeight * this.numOffStavePitches;
         Hilo.Tween._tweens.push(this.moveTween);
         // setup duration of animation
-        this.moveTween.duration = 500;
+        this.moveTween.duration = 50;
         // setup the transformation of animation
         this.moveTween.setProps({y:this.y}, {y: targetY});
         // startup animation

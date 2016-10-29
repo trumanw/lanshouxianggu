@@ -78,13 +78,46 @@ var game = window.game = {
             keyWidth: this.width / 4
         }).addTo(this.stave);
 
-        // bind action on keyboard
-        console.log(this.keyboard.getChildById('do'));
+        // bind actions on keyboard
         this.keyboard.getChildById('do').on(Hilo.event.POINTER_START, function(e){
-            e._stopped = true;
-            this.pitch.resetPitches();
+            if(this.pitch.hitTestPitch(1)){
+                // hit on the right pitch
+                this.pitch.resetPitches();
+            } else {
+                // hit on the wrong pitch
+                // game over
+            }
         }.bind(this));
-        console.log(this.keyboard.getChildById('do'));
+
+        this.keyboard.getChildById('ri').on(Hilo.event.POINTER_START, function(e){
+            if(this.pitch.hitTestPitch(2)){
+                // hit on the right pitch
+                this.pitch.resetPitches();
+            } else {
+                // hit on the wrong pitch
+                // game over
+            }
+        }.bind(this));
+
+        this.keyboard.getChildById('mi').on(Hilo.event.POINTER_START, function(e){
+            if(this.pitch.hitTestPitch(3)){
+                // hit on the right pitch
+                this.pitch.resetPitches();
+            } else {
+                // hit on the wrong pitch
+                // game over
+            }
+        }.bind(this));
+
+        this.keyboard.getChildById('fa').on(Hilo.event.POINTER_START, function(e){
+            if(this.pitch.hitTestPitch(4)){
+                // hit on the right pitch
+                this.pitch.resetPitches();
+            } else {
+                // hit on the wrong pitch
+                // game over
+            }
+        }.bind(this));
     },
 
     onUserInput: function(e){
