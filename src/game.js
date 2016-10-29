@@ -233,7 +233,6 @@ var game = window.game = {
 
     gameStart: function(){
         this.state = 'playing';
-        // this.pitch.startMove();
     },
 
     gameOver: function(){
@@ -245,8 +244,21 @@ var game = window.game = {
             // hide pitch
             this.pitch.visible = false;
             // show the GameOver scene
-            this.gameOverScene.show(this.pitch.passThrough, 0);
+            this.score = this.pitch.passThrough;
+            this.gameOverScene.show(this.pitch.passThrough, this.saveBestScore());
         }
+    },
+
+    saveBestScore: function(){
+        var score = this.score, best = 0;
+        if(Hilo.browser.supportStorage){
+            best = parseInt(localStorage.getItem('hilo-lsxg-best-score')) || 0;
+        }
+        if(score > best){
+            best = score;
+            localStorage.setItem('hilo-lsxg-best-score', score);
+        }
+        return best;
     }
 };
 
