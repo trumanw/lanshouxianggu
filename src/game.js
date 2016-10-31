@@ -34,8 +34,10 @@ var game = window.game = {
     },
 
     initStave: function(){
-        this.width = 720;
-        this.height = 1280;
+        // this.width = 720;
+        // this.height = 1280;
+        this.width = 750;
+        this.height = 1334;
         this.layer = 8;
         this.scale = 0.5;
 
