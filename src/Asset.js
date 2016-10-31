@@ -15,7 +15,7 @@ var Asset = ns.Asset = Hilo.Class.create({
         var resources = [
             {id:'bg', src:'images/bg.png'},
             {id:'keyboard', src:'images/keyboard.png'},
-            {id:'pitch', src:'images/pitch.jpg'},
+            {id:'pitch', src:'images/end.jpg'},
             {id:'ready', src:'images/ready.png'},
             {id:'over', src:'images/over.png'},
             {id:'number', src:'images/number.png'}
