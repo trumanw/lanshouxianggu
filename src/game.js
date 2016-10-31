@@ -37,7 +37,7 @@ var game = window.game = {
         // this.width = 720;
         // this.height = 1280;
         this.width = 750;
-        this.height = 1334;
+        this.height = 1206;
         this.layer = 8;
         this.scale = 0.5;
 

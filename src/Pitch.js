@@ -62,7 +62,7 @@ var Pitch = ns.Pitch = Hilo.Class.create({
         var placement = (4 * Math.random()) >> 0;
 
         // init the position of the pitch
-        pitch.x = this.pitchWidth * placement;
+        pitch.x = this.pitchWidth * placement + (this.pitchWidth - 170) / 2;
         pitch.y = this.pitchHeight * (index - 1);
     },
 
