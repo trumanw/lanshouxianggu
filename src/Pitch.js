@@ -90,7 +90,7 @@ var Pitch = ns.Pitch = Hilo.Class.create({
 
     hitTestPitch: function(index) {
         var total = this.children.length;
-        var currentPitch = (this.children[total-this.numOffStavePitches].x / this.pitchWidth) + 1;
+        var currentPitch = Math.floor((this.children[total-this.numOffStavePitches].x / this.pitchWidth) + 1);
         return currentPitch == index;
     },
 
