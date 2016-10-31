@@ -32,7 +32,7 @@ var Pitch = ns.Pitch = Hilo.Class.create({
             var pitch = new Hilo.Bitmap({
                 id: 'pitch' + i,
                 image: image,
-                rect: [4, 4, 356, 316],
+                rect: [4, 4, 338, 300],
                 scaleX: 0.5,
                 scaleY: 0.5
             }).addTo(this);
@@ -46,7 +46,7 @@ var Pitch = ns.Pitch = Hilo.Class.create({
             var pitch = new Hilo.Bitmap({
                 id: 'pitch' + i,
                 image: image,
-                rect: [4, 4, 356, 316],
+                rect: [4, 4, 338, 300],
                 scaleX: 0.5,
                 scaleY: 0.5
             })
@@ -62,7 +62,7 @@ var Pitch = ns.Pitch = Hilo.Class.create({
         var placement = (4 * Math.random()) >> 0;
 
         // init the position of the pitch
-        pitch.x = this.pitchWidth * placement + (this.pitchWidth - 170) / 2;
+        pitch.x = this.pitchWidth * placement + ((this.pitchWidth - 170) / 2);
         pitch.y = this.pitchHeight * (index - 1);
     },
 
