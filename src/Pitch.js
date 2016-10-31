@@ -32,8 +32,8 @@ var Pitch = ns.Pitch = Hilo.Class.create({
             var pitch = new Hilo.Bitmap({
                 id: 'pitch' + i,
                 image: image,
-                scaleX: 0.5,
-                scaleY: 0.5
+                scaleX: 0.52,
+                scaleY: 0.52
             }).addTo(this);
 
             this.placePitches(pitch, i);
@@ -45,8 +45,8 @@ var Pitch = ns.Pitch = Hilo.Class.create({
             var pitch = new Hilo.Bitmap({
                 id: 'pitch' + i,
                 image: image,
-                scaleX: 0.5,
-                scaleY: 0.5
+                scaleX: 0.52,
+                scaleY: 0.52
             })
 
             // this.getChildAt(i) = pitch;

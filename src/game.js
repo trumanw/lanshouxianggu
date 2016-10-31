@@ -38,7 +38,7 @@ var game = window.game = {
         // this.height = 1280;
         this.width = 750;
         this.height = 1206;
-        this.layer = 8;
+        this.layer = 7;
         this.scale = 0.5;
 
         // init stave context
