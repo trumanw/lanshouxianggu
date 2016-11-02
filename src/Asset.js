@@ -1,4 +1,3 @@
-
 (function(ns){
 
 var Asset = ns.Asset = Hilo.Class.create({
@@ -6,22 +5,20 @@ var Asset = ns.Asset = Hilo.Class.create({
 
     queue: null,
     bg: null,
-    ground: null,
+    keyboard: null,
+    pitch: null,
     ready: null,
     over: null,
     numberGlyphs: null,
-    birdAtlas: null,
-    holdback: null,
 
     load: function(){
         var resources = [
             {id:'bg', src:'images/bg.png'},
-            {id:'ground', src:'images/ground.png'},
+            {id:'keyboard', src:'images/keyboard.png'},
+            {id:'pitch', src:'images/pitch.jpg'},
             {id:'ready', src:'images/ready.png'},
             {id:'over', src:'images/over.png'},
-            {id:'number', src:'images/number.png'},
-            {id:'bird', src:'images/bird.png'},
-            {id:'holdback', src:'images/holdback.png'}
+            {id:'number', src:'images/number.png'}
         ];
 
         this.queue = new Hilo.LoadQueue();
@@ -32,22 +29,10 @@ var Asset = ns.Asset = Hilo.Class.create({
 
     onComplete: function(e){
         this.bg = this.queue.get('bg').content;
-        this.ground = this.queue.get('ground').content;
+        this.keyboard = this.queue.get('keyboard').content;
+        this.pitch = this.queue.get('pitch').content;
         this.ready = this.queue.get('ready').content;
         this.over = this.queue.get('over').content;
-        this.holdback = this.queue.get('holdback').content;
-
-        this.birdAtlas = new Hilo.TextureAtlas({
-            image: this.queue.get('bird').content,
-            frames: [
-                [0, 120, 86, 60],
-                [0, 60, 86, 60],
-                [0, 0, 86, 60]
-            ],
-            sprites: {
-                bird: [0, 1, 2]
-            }
-        });
 
         var number = this.queue.get('number').content;
         this.numberGlyphs = {
