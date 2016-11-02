@@ -24,6 +24,9 @@ var game = window.game = {
     gameReadyScene: null,
     gameOverScene: null,
 
+    lanshouAudio: null,
+    xiangguAudio: null,
+
     init: function(){
         this.asset = new game.Asset();
         this.asset.on('complete', function(e){
@@ -68,6 +71,20 @@ var game = window.game = {
         this.initKeyboard();
         this.initScenes();
 
+        // init audio
+        // init audio
+        Hilo.WebSound.enableAudio();
+        this.lanshouAudio = Hilo.WebSound.getAudio({
+            src: "sounds/lanshou.mp3",
+            loop: false
+        });
+
+        Hilo.WebSound.enableAudio();
+        this.xiangguAudio = Hilo.WebSound.getAudio({
+            src: "sounds/xianggu.mp3",
+            loop: false
+        });
+
         // ready to play
         // this.gameReady();
     },
@@ -111,16 +128,10 @@ var game = window.game = {
     },
 
     initKeyboardActions: function(){
-        // init audio
-        Hilo.WebSound.enableAudio();
-        var btnClickAudio = Hilo.WebSound.getAudio({
-            src: "http://g.tbcdn.cn/mtb/app-618h5/1.0.8/images/mole_die.mp3",
-            loop: false
-        });
 
         // bind actions on keyboard
         this.keyboard.getChildById('do').on(Hilo.event.POINTER_START, function(e){
-            btnClickAudio.play();
+            this.lanshouAudio.play();
             if(this.pitch.hitTestPitch(1)){
                 // hit on the right pitch
                 this.pitch.startMove();
@@ -132,7 +143,7 @@ var game = window.game = {
         }.bind(this));
 
         this.keyboard.getChildById('ri').on(Hilo.event.POINTER_START, function(e){
-            btnClickAudio.play();
+            this.lanshouAudio.play();
             if(this.pitch.hitTestPitch(2)){
                 // hit on the right pitch
                 this.pitch.startMove();
@@ -144,7 +155,7 @@ var game = window.game = {
         }.bind(this));
 
         this.keyboard.getChildById('mi').on(Hilo.event.POINTER_START, function(e){
-            btnClickAudio.play();
+            this.lanshouAudio.play();
             if(this.pitch.hitTestPitch(3)){
                 // hit on the right pitch
                 this.pitch.startMove();
@@ -156,7 +167,7 @@ var game = window.game = {
         }.bind(this));
 
         this.keyboard.getChildById('fa').on(Hilo.event.POINTER_START, function(e){
-            btnClickAudio.play();
+            this.lanshouAudio.play();
             if(this.pitch.hitTestPitch(4)){
                 // hit on the right pitch
                 this.pitch.startMove();
@@ -256,6 +267,8 @@ var game = window.game = {
             this.state = 'over';
             // stop moving pitches
             this.pitch.stopMove();
+            // play ending audio
+            this.xiangguAudio.play();
             // hide pitch
             this.pitch.visible = false;
             // show the GameOver scene
