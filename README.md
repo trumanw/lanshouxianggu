@@ -1,2 +1,2 @@
 # lanshouxianggu
-A gf customised Taiko no Tatsujin game - "Lanshouxianggu" ("蓝瘦香菇")
+Langshouxianggu web game powered by Hilo framework.
