@@ -26,6 +26,7 @@ var game = window.game = {
 
     lanshouAudio: null,
     xiangguAudio: null,
+    endingAudio: null,
 
     init: function(){
         this.asset = new game.Asset();
@@ -75,13 +76,19 @@ var game = window.game = {
         // init audio
         Hilo.WebSound.enableAudio();
         this.lanshouAudio = Hilo.WebSound.getAudio({
-            src: "sounds/lanshou.mp3",
+            src: "http://trumanwoo.com/sounds/lanshou.mp3",
             loop: false
         });
 
         Hilo.WebSound.enableAudio();
         this.xiangguAudio = Hilo.WebSound.getAudio({
-            src: "sounds/xianggu.mp3",
+            src: "http://trumanwoo.com/sounds/xianggu.mp3",
+            loop: false
+        });
+
+        Hilo.WebSound.enableAudio();
+        this.endingAudio = Hilo.WebSound.getAudio({
+            src: "http://trumanwoo.com/sounds/ending.mp3",
             loop: false
         });
 
@@ -131,8 +138,8 @@ var game = window.game = {
 
         // bind actions on keyboard
         this.keyboard.getChildById('do').on(Hilo.event.POINTER_START, function(e){
-            this.lanshouAudio.play();
             if(this.pitch.hitTestPitch(1)){
+                this.lanshouAudio.play();
                 // hit on the right pitch
                 this.pitch.startMove();
             } else {
@@ -143,8 +150,8 @@ var game = window.game = {
         }.bind(this));
 
         this.keyboard.getChildById('ri').on(Hilo.event.POINTER_START, function(e){
-            this.lanshouAudio.play();
             if(this.pitch.hitTestPitch(2)){
+                this.lanshouAudio.play();
                 // hit on the right pitch
                 this.pitch.startMove();
             } else {
@@ -155,8 +162,8 @@ var game = window.game = {
         }.bind(this));
 
         this.keyboard.getChildById('mi').on(Hilo.event.POINTER_START, function(e){
-            this.lanshouAudio.play();
             if(this.pitch.hitTestPitch(3)){
+                this.lanshouAudio.play();
                 // hit on the right pitch
                 this.pitch.startMove();
             } else {
@@ -167,8 +174,8 @@ var game = window.game = {
         }.bind(this));
 
         this.keyboard.getChildById('fa').on(Hilo.event.POINTER_START, function(e){
-            this.lanshouAudio.play();
             if(this.pitch.hitTestPitch(4)){
+                this.lanshouAudio.play();
                 // hit on the right pitch
                 this.pitch.startMove();
             } else {
@@ -279,6 +286,7 @@ var game = window.game = {
 
     saveBestScore: function(){
         var score = this.score, best = 0;
+        this.endingAudio.play();
         if(Hilo.browser.supportStorage){
             best = parseInt(localStorage.getItem('hilo-lsxg-best-score')) || 0;
         }
